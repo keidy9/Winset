@@ -33,5 +33,33 @@ const getTeamPoints = (team) => {
     return Math.floor(teamPoints);
 }
 
-console.log(getTeamPoints(team1))
-console.log(getTeamPoints(team2))
+// console.log(getTeamPoints(team1))
+// console.log(getTeamPoints(team2))
+
+
+//database tables:
+/**
+ * 1.TEAMS
+ *  -id
+ *  -team name
+ *  -status? (active or eliminated)
+ *  -
+ */
+
+
+/**
+ * players {
+ *  id      playerName         player tier    team id (FOREIGN KEY)
+ *  ..
+ *  ..
+ *  ..
+ *  ..
+ * }
+ */
+
+
+/**
+ * teams {
+ *  id      team name       status (active or eliminated)
+ * }
+ */
