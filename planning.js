@@ -2,26 +2,41 @@
 // do math.random() * the range of points + the lower cap of points (ex. for tier 2 25-13 = 12 -----> (math.random() * 12) + 13) 
 // calculate odds by taking average tier of players, calculated average points, then divide by another team.
 // calculate parlay odds by multiplying the chances plus adding some other multiply factor to incentivise parlays. 
+
+
+/**
+ * tier 1 = 5-21
+ * tier 2 = 7-22
+ * tier 3 = 9-23
+ * tier 4 = 11-24
+ * tier 5 = 13-25
+ */
+
+
 const team1 = {
-    a: 50,
-    b: 51,
-    c: 90,
-    d: 21,
-    e: 31,
+    a: 1,
+    b: 1,
+    c: 2,
+    d: 3,
+    e: 1,
 }
 // total 243
 
 const team2 = {
-    a: 60,
-    b: 11,
-    c: 80,
-    d: 51,
-    e: 76,
+    a: 5,
+    b: 5,
+    c: 5,
+    d: 5,
+    e: 5,
 }
 // total 278
 
 const getRandomPoints = (playerWeighting) => {
-    return Math.random() * playerWeighting;
+    if (playerWeighting === 1) return Math.floor(Math.random() * 17) + 5;
+    if (playerWeighting === 2) return Math.floor(Math.random() * 16) + 7;
+    if (playerWeighting === 3) return Math.floor(Math.random() * 15) + 9;
+    if (playerWeighting === 4) return Math.floor(Math.random() * 14) + 11;
+    if (playerWeighting === 5) return Math.floor(Math.random() * 13) + 13;
     // after getting these points, store it in the server for the player.
 }
 
@@ -33,8 +48,8 @@ const getTeamPoints = (team) => {
     return Math.floor(teamPoints);
 }
 
-// console.log(getTeamPoints(team1))
-// console.log(getTeamPoints(team2))
+console.log(getTeamPoints(team1))
+console.log(getTeamPoints(team2))
 
 
 //database tables:

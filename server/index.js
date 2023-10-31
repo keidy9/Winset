@@ -1,15 +1,21 @@
-const { Pool } = require('pg');
+const express = require('express');
+const path = require('path');
 
-const connectionString =
-  'postgres://rieenoee:yfHONFEzKgLWSq1GXjySh0U0jR8yEJ0c@bubble.db.elephantsql.com/rieenoee';
+// Server setup
+const app = express();
+const PORT = 3000;
 
-const pool = new Pool({
-    connectionString,
+// Parsing logic
+app.use(express.json());
+app.use(express.urlencoded());
+
+// FACT: 99% of gamblers quit right before they hit it big
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-module.exports = {
-    query: (queryString, params, callback) => {
-        console.log('executed query', queryString)
-        return pool.query(queryString, params, callback);
-    }
-}
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}...`);
+});
+
+module.exports = app;
