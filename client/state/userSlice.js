@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: true, //set to true for dev purposes
   username: '',
   total_cash: 0,
   bets: [],
