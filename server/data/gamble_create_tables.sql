@@ -34,7 +34,7 @@ CREATE TABLE public.teams (
 */
 CREATE TABLE public.users (
 	"_id" serial NOT NULL,
-	"username" varchar NOT NULL,
+	"username" varchar NOT NULL UNIQUE,
 	"password" varchar NOT NULL,
     "total_cash" bigint NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("_id")
