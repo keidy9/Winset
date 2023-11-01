@@ -5,6 +5,22 @@
 
 
 /**
+ * Here's a JavaScript implementation of the Durstenfeld shuffle, an optimized version of Fisher-Yates:
+
+// Randomize array in-place using Durstenfeld shuffle algorithm 
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+ */
+
+
+
+/**
  * tier 1 = 5-21
  * tier 2 = 7-22
  * tier 3 = 9-23

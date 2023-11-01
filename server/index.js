@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 
 const userController = require('./controllers/userController.js');
+const teamsController = require('./controllers/teamsController.js');
 
 // Server setup
 const app = express();
@@ -18,9 +19,11 @@ app.use(express.urlencoded());
  *  */
 app.options('/signup', cors()); // make sure to add cors() as a middleware to your route!
 app.options('/login', cors()); // make sure to add cors() as a middleware to your route!
+app.options('/teams', cors()); // make sure to add cors() as a middleware to your route!
+app.options('/players', cors()); // make sure to add cors() as a middleware to your route!
 // ????
 app.use(express.static('dist'));
-// z
+
 // FACT: 99% of gamblers quit right before they hit it big
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
@@ -35,6 +38,16 @@ app.post('/signup', cors(), userController.createUser, (req, res) => {
 // Login route
 app.post('/login', cors(), userController.getUser, (req, res) => {
   res.status(200).json(res.locals.user);
+});
+
+// Fetch teams route
+app.get('/teams', cors(), teamsController.getTeams, (req, res) => {
+  res.status(200).json(res.locals.teams);
+});
+
+// Fetch players route
+app.get('/players', cors(), teamsController.getPlayers, (req, res) => {
+  res.status(200).json(res.locals.teams);
 });
 
 // Invalid route handler

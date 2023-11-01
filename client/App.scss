@@ -1,0 +1,40 @@
+body {
+  font-family: 'Rubik', sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.75rem;
+  background-image: linear-gradient(to bottom, #0f172a, #334155);
+  color: #f8fafc;
+}
+
+.navbar-title {
+  margin-left: 0.5rem;
+}
+
+.navbar-user-info {
+  display: flex;
+  margin: 0.5rem;
+}
+
+.navbar-cash,
+.logout-username,
+.logout-button {
+  margin: 0 0.5rem;
+}
+
+.logout-button {
+  background-color: rgba(192, 4, 4, 0.801);
+  padding: 0 1rem;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+}
