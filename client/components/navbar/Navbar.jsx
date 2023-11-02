@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../state/userSlice';
 
-const Navbar = () => {
+const Navbar = ({ isBracketHandler }) => {
   const { username, total_cash } = useSelector(
     ({ userReducer }) => userReducer
   );
@@ -14,8 +14,12 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar-title">WinSet</div>
-      <div className="navbar-bracket">Bracket</div>
-      <div className="navbar-bets">Bets</div>
+      <div className="navbar-bracket" onClick={isBracketHandler}>
+        Bracket
+      </div>
+      <div className="navbar-bets" onClick={isBracketHandler}>
+        Bets
+      </div>
       <div className="navbar-user-info">
         <div className="navbar-cash">Cash: ${total_cash}</div>
         <div className="logout-username">{username}</div>

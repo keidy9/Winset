@@ -12,7 +12,10 @@ body {
 }
 
 .navbar-title {
+  font-family: 'Agbalumo';
+  font-size: larger;
   margin-left: 0.5rem;
+  // text-shadow:1px 0 1px #94a3b8;
 }
 
 .navbar-user-info {
@@ -24,6 +27,11 @@ body {
 .logout-username,
 .logout-button {
   margin: 0 0.5rem;
+}
+
+.navbar-bracket:hover,
+.navbar-bets:hover {
+  cursor: pointer;
 }
 
 .logout-button {
@@ -39,101 +47,81 @@ body {
   cursor: pointer;
 }
 
-// .bracket-container {
-//   display: flex;
-//   justify-content: space-around;
-// }
+.bracket-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-// .bracket-qf,
-// .bracket-sf,
-// .bracket-f {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   margin: 10%;
-//   width: 100%;
-//   background-color: #334155;
-// }
+.reset-button,
+.fast-forward-button {
+  background-color: aqua;
+  height: 35px;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin: 15px 30px;
+  border-radius: 5px;
+  font-size: medium;
+  font-weight: bold;
+}
 
-// .match-box-qf,
-// .match-box-sf,
-// .match-box-f {
-//   margin: 8vh 0;
-//   // background-color: aqua;
-// }
-
-// div[class^='team-box'] {
-//   border: solid;
-//   border-color: #334155;
-//   width: 10rem;
-//   height: 2rem;
-//   background-color: red;
-// }
-
-// .horizontal-line1,
-// .horizontal-line2,
-// .horizontal-line3,
-// .horizontal-line4,
-// .horizontal-line5,
-// .horizontal-line6 {
-//   position: absolute;
-//   border-top: solid 1px;
-//   border-left: solid 1px;
-//   border-bottom: solid 1px;
-//   width: 25%
-// }
+.reset-button:hover,
+.fast-forward-button:hover {
+  cursor: pointer;
+}
+// ------------------------------------------
+// CREDIT FOR TOURNAMENT BRACKET CSS AND COMPONENT GOES TO Serhii Dudnyk, https://codepen.io/sdudnyk/pen/bWbqMb
 $side-margin: 50px;
 $vertical-margin: 10px;
 
-body{
-  background-color: DarkSalmon ;
+body {
+  background-color: DarkSalmon;
 }
 
-.wrapper{
+.wrapper {
   display: flex;
   height: auto;
   justify-content: center;
 }
 
-.item{
+.item {
   display: flex;
   flex-direction: row-reverse;
-  p{
+  p {
     padding: 20px;
     margin: 0;
     background-color: Beige;
   }
-  
-  &-parent{
+
+  &-parent {
     position: relative;
     margin-left: $side-margin;
     display: flex;
     align-items: center;
-    &:after{
-        position: absolute;
-        content: '';
-        width: calc($side-margin/2);
-        height: 2px;
-        left: 0;
-        top: 50%;
-        background-color: #fff;
-        transform: translateX(-100%);
+    &:after {
+      position: absolute;
+      content: '';
+      width: calc($side-margin/2);
+      height: 2px;
+      left: 0;
+      top: 50%;
+      background-color: #fff;
+      transform: translateX(-100%);
     }
   }
-  &-childrens{
+  &-childrens {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  &-child{
+  &-child {
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
     margin-top: $vertical-margin;
     margin-bottom: $vertical-margin;
     position: relative;
-    &:before{
+    &:before {
       content: '';
       position: absolute;
       background-color: #fff;
@@ -143,22 +131,22 @@ body{
       width: 25px;
       height: 2px;
     }
-    &:after{
+    &:after {
       content: '';
       position: absolute;
       background-color: #fff;
       right: calc($side-margin / -2);
-      height: calc(50% + 22px) ;
+      height: calc(50% + 22px);
       width: 2px;
       top: 50%;
     }
-    &:last-child{
-      &:after{
+    &:last-child {
+      &:after {
         transform: translateY(-100%);
       }
     }
-    &:only-child:after{          
-      display: none;          
+    &:only-child:after {
+      display: none;
     }
   }
 }

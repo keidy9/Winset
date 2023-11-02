@@ -1,5 +1,5 @@
 // have tiers of players from 1-3, tier 1 is 10-20 points, tier 2 is 13-25 points, tier 3 is 15-30 points.
-// do math.random() * the range of points + the lower cap of points (ex. for tier 2 25-13 = 12 -----> (math.random() * 12) + 13) 
+// do math.random() * the range of points + the lower cap of points (ex. for tier 2 25-13 = 12 -----> (math.random() * 12) + 13)
 // calculate odds by taking average tier of players, calculated average points, then divide by another team.
 // calculate parlay odds by multiplying the chances plus adding some other multiply factor to incentivise parlays. 
 
@@ -48,7 +48,7 @@ const team2 = {
 // total 278
 
 const getRandomPoints = (playerWeighting) => {
-    if (playerWeighting === 1) return Math.floor(Math.random() * 17) + 5;
+    if (playerWeighting === 1) return Math.floor(Math.random() * 18) + 5;
     if (playerWeighting === 2) return Math.floor(Math.random() * 16) + 7;
     if (playerWeighting === 3) return Math.floor(Math.random() * 15) + 9;
     if (playerWeighting === 4) return Math.floor(Math.random() * 14) + 11;

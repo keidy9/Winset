@@ -11,11 +11,9 @@ const teamSlice = createSlice({
   reducers: {
     getTeams: (state, action) => {
       state.teams = action.payload;
-      console.log(state);
     },
     getPlayers: (state, action) => {
       state.players = action.payload;
-      console.log(state);
     },
   },
 });
