@@ -15,6 +15,7 @@ import './App.scss';
 
 const App = () => {
   const isLoggedIn = useSelector(({ userReducer }) => userReducer.isLoggedIn);
+  const bets = useSelector(({ userReducer }) => userReducer.bets);
   const teamsArray = useSelector(({ teamReducer }) => teamReducer.teams);
   const playersArray = useSelector(({ teamReducer }) => teamReducer.players);
   const dispatch = useDispatch();
@@ -27,6 +28,12 @@ const App = () => {
   const [playerPointsObj, setPlayerPointsObj] = useState([]);
   const [phase, setPhase] = useState('quarterfinals');
   const [gamesObj, setGamesObj] = useState({});
+  const [odds, setOdds] = useState({});
+
+  /** HISTORIC INFORMATIONAL STATES */
+  const [quarterfinalPointsObj, setQuarterfinalPointsObj] = useState([]);
+  const [semifinalPointsObj, setSemifinalPointsObj] = useState([]);
+  const [finalsPointsObj, setFinalsPointsObj] = useState([]);
   const [semiFinalists, setSemiFinalists] = useState([]);
   const [finalists, setFinalists] = useState([]);
   const [winner, setWinner] = useState([]);
@@ -40,7 +47,8 @@ const App = () => {
     setTeams(teamsArray);
     setTeamsCopy(teamsArray);
     setPlayers(playersArray);
-  }, [teamsArray, playersArray]);
+    calc();
+  }, [teamsArray, playersArray, teams, players]);
 
   const fetchTeams = async () => {
     const response = await fetch(`http://localhost:3000/teams`);
@@ -87,14 +95,17 @@ const App = () => {
       };
     });
     players.forEach((player) => {
-      const points = getRandomPoints(player.tier);
-      teamPointsObj[player.team].points += points;
-      teamPointsObj[player.team].players[player.name] = {
-        player: player.name,
-        tier: player.tier,
-        points: points,
-      };
+      if (teamPointsObj[player.team]) {
+        const points = getRandomPoints(player.tier);
+        teamPointsObj[player.team].points += points;
+        teamPointsObj[player.team].players[player.name] = {
+          player: player.name,
+          tier: player.tier,
+          points: points,
+        };
+      }
     });
+    console.log('teamPoints:', teamPointsObj);
     setGamesObj((prevState) => {
       prevState[phase] = teamPointsObj;
       return prevState;
@@ -112,19 +123,24 @@ const App = () => {
           ));
     }
     setTeamsCopy(teamsCopyCopy);
+    console.log('teamscopy', teamsCopy);
+    setTeamPointsObj([]);
     // FOR QUARTERFINALS
     if (phase === 'quarterfinals') {
       setSemiFinalists(teamsCopyCopy);
+      setQuarterfinalPointsObj(teamPointsObj);
       setPhase('semifinals');
     }
     // FOR SEMIFINALS
     else if (phase === 'semifinals') {
       setFinalists(teamsCopyCopy);
+      setSemifinalPointsObj(teamPointsObj);
       setPhase('finals');
     }
     //FOR FINALS
     else if (phase === 'finals') {
       setWinner(teamsCopyCopy);
+      setFinalsPointsObj(teamPointsObj);
       setPhase('done');
     }
   };
@@ -138,19 +154,24 @@ const App = () => {
     setPlayerPointsObj([]);
     setPhase('quarterfinals');
     setGamesObj({});
+    setQuarterfinalPointsObj([]);
+    setSemifinalPointsObj([]);
+    setFinalsPointsObj([]);
     setSemiFinalists([]);
     setFinalists([]);
     setWinner([]);
-    // const [teams, setTeams] = useState(teamsArray);
-    // const [teamsCopy, setTeamsCopy] = useState(teamsArray);
-    // const [players, setPlayers] = useState(playersArray);
-    // const [teamPointsObj, setTeamPointsObj] = useState([]);
-    // const [playerPointsObj, setPlayerPointsObj] = useState([]);
-    // const [phase, setPhase] = useState('quarterfinals');
-    // const [gamesObj, setGamesObj] = useState({});
-    // const [semiFinalists, setSemiFinalists] = useState([]);
-    // const [finalists, setFinalists] = useState([]);
-    // const [winner, setWinner] = useState([]);
+    setOdds({});
+  };
+
+  /** CALCULATE ODDS LOGIC */
+  const calc = () => {
+    teams.forEach((team) => {
+      odds[team.name] = 0;
+    });
+    players.forEach((player) => {
+      odds[player.team] += player.tier;
+    })
+    console.log(odds)
   };
 
   return (
@@ -173,24 +194,35 @@ const App = () => {
 
       {/* MAIN APP __________________________________________________ */}
       {isLoggedIn && isBracket === 'bracket' && (
-        <div className="navbar">
-          <Navbar isBracketHandler={isBracketHandler} />
-          <TournamentBracket
-            teams={teams}
-            reset={reset}
-            fastForward={fastForward}
-            semiFinalists={semiFinalists}
-            finalists={finalists}
-            winner={winner}
-          />
-        </div>
+        <>
+          <div className="navbar">
+            <Navbar isBracketHandler={isBracketHandler} />
+          </div>
+          <div>
+            <TournamentBracket
+              teams={teams}
+              reset={reset}
+              fastForward={fastForward}
+              quarterfinalPointsObj={quarterfinalPointsObj}
+              semifinalPointsObj={semifinalPointsObj}
+              finalsPointsObj={finalsPointsObj}
+              semiFinalists={semiFinalists}
+              finalists={finalists}
+              winner={winner}
+            />
+          </div>
+        </>
       )}
 
       {isLoggedIn && isBracket === 'bets' && (
-        <div className="navbar">
-          <Navbar isBracketHandler={isBracketHandler} />
-          <Bets />
-        </div>
+        <>
+          <div className="navbar">
+            <Navbar isBracketHandler={isBracketHandler} />
+          </div>
+          <div className="bets-container">
+            <Bets teamsCopy={teamsCopy} odds={odds}/>
+          </div>
+        </>
       )}
     </div>
   );

@@ -69,6 +69,18 @@ body {
 .fast-forward-button:hover {
   cursor: pointer;
 }
+
+.bets-container {
+  background-color: #99a0a8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
 // ------------------------------------------
 // CREDIT FOR TOURNAMENT BRACKET CSS AND COMPONENT GOES TO Serhii Dudnyk, https://codepen.io/sdudnyk/pen/bWbqMb
 $side-margin: 50px;
@@ -92,6 +104,8 @@ body {
     margin: 0;
     background-color: Beige;
   }
+
+
 
   &-parent {
     position: relative;
