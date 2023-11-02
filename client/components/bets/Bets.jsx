@@ -1,10 +1,17 @@
 import React from 'react';
+import Bet from './Bet';
 
-const Bets = ({ teamsCopy, odds }) => {
+const Bets = ({ teamsCopy, odds, phase, semiFinalists, finalists, winner }) => {
+  if (phase ==='done') {
+    return (<div>
+      NO MATCHES AVAILABLE AT THIS MOMENT!
+    </div>)
+  }
+
+
   const oddsCalced = {};
   for (let i = 0; i < teamsCopy.length; i++) {
-    console.log(odds[teamsCopy[i].name]);
-    
+
     oddsCalced[teamsCopy[i + 1].name] =
       odds[teamsCopy[i].name] / odds[teamsCopy[i + 1].name];
 
@@ -17,15 +24,22 @@ const Bets = ({ teamsCopy, odds }) => {
       oddsCalced[teamsCopy[i + 1].name].toFixed(2);
     i++;
   }
-  console.log(oddsCalced);
+  
 
   return (
     <div>
       {teamsCopy.map((team, index) => {
         return (
-          <div key={crypto.randomUUID()}>
-            {team.name}: {Math.round(oddsCalced[team.name] * 100)}
-          </div>
+          <Bet
+            key={crypto.randomUUID()}
+            teamCopy={teamsCopy}
+            team={team}
+            oddsCalced={Math.round(oddsCalced[team.name] * 100)}
+            phase={phase}
+            semiFinalists={semiFinalists}
+            finalists={finalists}
+            winner={winner}
+          />
         );
       })}
     </div>

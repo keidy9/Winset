@@ -1,12 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../state/userSlice';
+import { logout, addCash } from '../../state/userSlice';
 
 const Navbar = ({ isBracketHandler }) => {
   const { username, total_cash } = useSelector(
     ({ userReducer }) => userReducer
   );
   const dispatch = useDispatch();
+
+  const addCashHandler = () => {
+    dispatch(addCash(500))
+  }
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -22,7 +26,8 @@ const Navbar = ({ isBracketHandler }) => {
       </div>
       <div className="navbar-user-info">
         <div className="navbar-cash">Cash: ${total_cash}</div>
-        <div className="logout-username">{username}</div>
+        <div className='circle' onClick={addCashHandler}></div>
+        {/* <div className="logout-username">{username}</div> */}
         <button className="logout-button" onClick={logoutHandler}>
           Logout
         </button>

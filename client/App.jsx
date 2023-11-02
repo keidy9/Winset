@@ -12,6 +12,7 @@ import {
 import TournamentBracket from './components/tournamentBracket/TournamentBracket.jsx';
 import Bets from './components/bets/Bets.jsx';
 import './App.scss';
+import { updateBets } from './state/userSlice.js';
 
 const App = () => {
   const isLoggedIn = useSelector(({ userReducer }) => userReducer.isLoggedIn);
@@ -128,18 +129,21 @@ const App = () => {
     // FOR QUARTERFINALS
     if (phase === 'quarterfinals') {
       setSemiFinalists(teamsCopyCopy);
+      dispatch(updateBets(teamsCopyCopy))
       setQuarterfinalPointsObj(teamPointsObj);
       setPhase('semifinals');
     }
     // FOR SEMIFINALS
     else if (phase === 'semifinals') {
       setFinalists(teamsCopyCopy);
+      dispatch(updateBets(teamsCopyCopy))
       setSemifinalPointsObj(teamPointsObj);
       setPhase('finals');
     }
     //FOR FINALS
     else if (phase === 'finals') {
       setWinner(teamsCopyCopy);
+      dispatch(updateBets(teamsCopyCopy))
       setFinalsPointsObj(teamPointsObj);
       setPhase('done');
     }
@@ -170,8 +174,8 @@ const App = () => {
     });
     players.forEach((player) => {
       odds[player.team] += player.tier;
-    })
-    console.log(odds)
+    });
+    console.log(odds);
   };
 
   return (
@@ -220,7 +224,14 @@ const App = () => {
             <Navbar isBracketHandler={isBracketHandler} />
           </div>
           <div className="bets-container">
-            <Bets teamsCopy={teamsCopy} odds={odds}/>
+            <Bets
+              teamsCopy={teamsCopy}
+              odds={odds}
+              phase={phase}
+              semiFinalists={semiFinalists}
+              finalists={finalists}
+              winner={winner}
+            />
           </div>
         </>
       )}
