@@ -129,21 +129,21 @@ const App = () => {
     // FOR QUARTERFINALS
     if (phase === 'quarterfinals') {
       setSemiFinalists(teamsCopyCopy);
-      dispatch(updateBets(teamsCopyCopy))
+      dispatch(updateBets(teamsCopyCopy));
       setQuarterfinalPointsObj(teamPointsObj);
       setPhase('semifinals');
     }
     // FOR SEMIFINALS
     else if (phase === 'semifinals') {
       setFinalists(teamsCopyCopy);
-      dispatch(updateBets(teamsCopyCopy))
+      dispatch(updateBets(teamsCopyCopy));
       setSemifinalPointsObj(teamPointsObj);
       setPhase('finals');
     }
     //FOR FINALS
     else if (phase === 'finals') {
       setWinner(teamsCopyCopy);
-      dispatch(updateBets(teamsCopyCopy))
+      dispatch(updateBets(teamsCopyCopy));
       setFinalsPointsObj(teamPointsObj);
       setPhase('done');
     }
@@ -182,7 +182,7 @@ const App = () => {
     <div>
       {/* SIGN UP/LOGIN __________________________________________________ */}
       {!isLoggedIn ? (
-        <>
+        <div className='signup-page'>
           <Signup isSignUp={isSignUp} />
           <button
             onClick={() => {
@@ -191,7 +191,7 @@ const App = () => {
           >
             {isSignUp ? 'Login' : 'Sign up'}
           </button>
-        </>
+        </div>
       ) : (
         ''
       )}
@@ -202,7 +202,7 @@ const App = () => {
           <div className="navbar">
             <Navbar isBracketHandler={isBracketHandler} />
           </div>
-          <div>
+          <div className="tournament-bracket-container">
             <TournamentBracket
               teams={teams}
               reset={reset}
@@ -223,15 +223,17 @@ const App = () => {
           <div className="navbar">
             <Navbar isBracketHandler={isBracketHandler} />
           </div>
-          <div className="bets-container">
-            <Bets
-              teamsCopy={teamsCopy}
-              odds={odds}
-              phase={phase}
-              semiFinalists={semiFinalists}
-              finalists={finalists}
-              winner={winner}
-            />
+          <div className="bets-page">
+            <div className="bets-container">
+              <Bets
+                teamsCopy={teamsCopy}
+                odds={odds}
+                phase={phase}
+                semiFinalists={semiFinalists}
+                finalists={finalists}
+                winner={winner}
+              />
+            </div>
           </div>
         </>
       )}

@@ -3,7 +3,7 @@ import Bet from './Bet';
 
 const Bets = ({ teamsCopy, odds, phase, semiFinalists, finalists, winner }) => {
   if (phase ==='done') {
-    return (<div>
+    return (<div className='no-matches-statement'>
       NO MATCHES AVAILABLE AT THIS MOMENT!
     </div>)
   }

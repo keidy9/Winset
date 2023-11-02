@@ -18,10 +18,10 @@ const TournamentBracket = ({
     <>
       <div className="bracket-buttons-container">
         <button className="reset-button" onClick={reset}>
-          RESET
+          RESET 🔄
         </button>
         <button className="fast-forward-button" onClick={fastForward}>
-          FAST FORWARD
+          FAST FORWARD ⏩
         </button>
       </div>
       <div className="wrapper">

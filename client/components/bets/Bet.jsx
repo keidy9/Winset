@@ -99,18 +99,24 @@ const Bet = ({
 
   return (
     <div className="bet-container">
-      <div className="bet-team-odds">
-        {team.name}: {oddsCalced}
+      <div className="bet-team-odds-container">
+        <div className='bet-team'>
+        {team.name}:
+        </div>
+        <div className='bet-odds'>
+        {oddsCalced}
+        </div>
       </div>
-      <form onSubmit={onPlaceBetHandler}>
+      <form onSubmit={onPlaceBetHandler} className='bet-input-form'>
         <input
           className="bet-input"
           type="text"
           name="bet"
           placeholder="Place your bet..."
         />
-        <button className="bet-place-button">PLACE</button>
+        <button className="bet-place-button">PLACE BET!</button>
       </form>
+      <div className='bet-separator'></div>
     </div>
   );
 };

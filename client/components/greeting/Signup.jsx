@@ -36,7 +36,7 @@ const Signup = ({ isSignUp }) => {
   };
 
   return (
-    <div>
+    <div className='signup-container'>
       <div>99% of gamblers quit right before they hit it big!</div>
       {isSignUp ? (
         <div>

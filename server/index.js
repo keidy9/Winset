@@ -21,6 +21,7 @@ app.options('/signup', cors()); // make sure to add cors() as a middleware to yo
 app.options('/login', cors()); // make sure to add cors() as a middleware to your route!
 app.options('/teams', cors()); // make sure to add cors() as a middleware to your route!
 app.options('/players', cors()); // make sure to add cors() as a middleware to your route!
+app.options('/logout', cors()); // make sure to add cors() as a middleware to your route!
 // ????
 app.use(express.static('dist'));
 
@@ -38,6 +39,11 @@ app.post('/signup', cors(), userController.createUser, (req, res) => {
 // Login route
 app.post('/login', cors(), userController.getUser, (req, res) => {
   res.status(200).json(res.locals.user);
+});
+
+// Logout route
+app.post('/logout', cors(), userController.updateUser, (req, res) => {
+  res.status(200).send('updated user');
 });
 
 // Fetch teams route
