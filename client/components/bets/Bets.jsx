@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Bets = () => {
-  return <div>Bets</div>;
+  return <div className='bets-container'>Bets</div>;
 };
 
 export default Bets;

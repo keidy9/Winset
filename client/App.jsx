@@ -94,20 +94,14 @@ const App = () => {
         tier: player.tier,
         points: points,
       };
-      // console.log(teams);
-      // console.log(teamPointsObj);
     });
     setGamesObj((prevState) => {
       prevState[phase] = teamPointsObj;
       return prevState;
     });
-    // console.log(teams);
-    // console.log(teams[0].name)
     let teamsCopyCopy = [...teamsCopy];
     for (let i = 0; i < teamsCopyCopy.length; ++i) {
       console.log(i);
-      // console.log(teamPointsObj[teams[i].name].points)
-      // console.log(teamPointsObj[teams[i + 1].name].points)
       teamPointsObj[teamsCopyCopy[i].name].points >
       teamPointsObj[teamsCopyCopy[i + 1].name].points
         ? (teamsCopyCopy = teamsCopyCopy.filter(
@@ -135,6 +129,30 @@ const App = () => {
     }
   };
 
+  /** RESET TOURNAMENT BRACKET LOGIC */
+  const reset = () => {
+    const newShuffledTeams = shuffleArray(teams.slice());
+    dispatch(getTeams(newShuffledTeams));
+    setTeamsCopy(teamsArray);
+    setTeamPointsObj([]);
+    setPlayerPointsObj([]);
+    setPhase('quarterfinals');
+    setGamesObj({});
+    setSemiFinalists([]);
+    setFinalists([]);
+    setWinner([]);
+    // const [teams, setTeams] = useState(teamsArray);
+    // const [teamsCopy, setTeamsCopy] = useState(teamsArray);
+    // const [players, setPlayers] = useState(playersArray);
+    // const [teamPointsObj, setTeamPointsObj] = useState([]);
+    // const [playerPointsObj, setPlayerPointsObj] = useState([]);
+    // const [phase, setPhase] = useState('quarterfinals');
+    // const [gamesObj, setGamesObj] = useState({});
+    // const [semiFinalists, setSemiFinalists] = useState([]);
+    // const [finalists, setFinalists] = useState([]);
+    // const [winner, setWinner] = useState([]);
+  };
+
   return (
     <div>
       {/* SIGN UP/LOGIN __________________________________________________ */}
@@ -159,8 +177,8 @@ const App = () => {
           <Navbar isBracketHandler={isBracketHandler} />
           <TournamentBracket
             teams={teams}
+            reset={reset}
             fastForward={fastForward}
-            phase={phase}
             semiFinalists={semiFinalists}
             finalists={finalists}
             winner={winner}

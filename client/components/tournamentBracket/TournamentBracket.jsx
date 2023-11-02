@@ -4,8 +4,8 @@ import React from 'react';
 
 const TournamentBracket = ({
   teams,
+  reset,
   fastForward,
-  phase,
   semiFinalists,
   finalists,
   winner,
@@ -13,7 +13,7 @@ const TournamentBracket = ({
   return (
     <>
       <div className="bracket-buttons-container">
-        <button className="reset-button">RESET</button>
+        <button className="reset-button" onClick={reset}>RESET</button>
         <button className="fast-forward-button" onClick={fastForward}>
           FAST FORWARD
         </button>
