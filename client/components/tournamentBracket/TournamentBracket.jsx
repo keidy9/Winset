@@ -27,15 +27,15 @@ const TournamentBracket = ({
       <div className="wrapper">
         <div className="item">
           <div className="item-parent">
-            {winner[0] ? <p>{winner[0].name}</p> : <p>winner</p>}
+            {winner[0] ? <p className='yes-team'>{winner[0].name}</p> : <p className='no-team'>winner</p>}
           </div>
           <div className="item-childrens">
             <div className="item-child">
               <div className="item">
                 <div className="item-parent">
-                  {finalists[0] ? <p>{finalists[0].name}</p> : <p>finals</p>}
+                  {finalists[0] ? <p className='yes-team'>{finalists[0].name}</p> : <p className='no-team'>finals</p>}
                   {finalists[0] && finalsPointsObj[finalists[0].name] ? (
-                    <p className="points-box">
+                    <p className="points-box" >
                       {finalsPointsObj[finalists[0].name].points}
                     </p>
                   ) : (
@@ -47,9 +47,9 @@ const TournamentBracket = ({
                     <div className="item">
                       <div className="item-parent">
                         {semiFinalists[0] ? (
-                          <p>{semiFinalists[0].name}</p>
+                          <p className='yes-team'>{semiFinalists[0].name}</p>
                         ) : (
-                          <p>semifinals</p>
+                          <p className='no-team'>semifinals</p>
                         )}
                               {semiFinalists[0] &&
                           semifinalPointsObj[semiFinalists[0].name] ? (
@@ -65,7 +65,7 @@ const TournamentBracket = ({
                       </div>
                       <div className="item-childrens">
                         <div className="item-child">
-                          <p>{teams[0].name}</p>
+                          <p className='yes-team'>{teams[0].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[0].name] ? (
                             <p className="points-box">
@@ -79,7 +79,7 @@ const TournamentBracket = ({
                           )}
                         </div>
                         <div className="item-child">
-                          <p>{teams[1].name}</p>
+                          <p className='yes-team'>{teams[1].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[1].name] ? (
                             <p className="points-box">
@@ -100,9 +100,9 @@ const TournamentBracket = ({
                     <div className="item">
                       <div className="item-parent">
                         {semiFinalists[0] ? (
-                          <p>{semiFinalists[1].name}</p>
+                          <p className='yes-team'>{semiFinalists[1].name}</p>
                         ) : (
-                          <p>semifinals</p>
+                          <p className='no-team'>semifinals</p>
                         )}
                               {semiFinalists[0] &&
                           semifinalPointsObj[semiFinalists[1].name] ? (
@@ -118,7 +118,7 @@ const TournamentBracket = ({
                       </div>
                       <div className="item-childrens">
                         <div className="item-child">
-                          <p>{teams[2].name}</p>
+                          <p className='yes-team'>{teams[2].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[2].name] ? (
                             <p className="points-box">
@@ -132,7 +132,7 @@ const TournamentBracket = ({
                           )}
                         </div>
                         <div className="item-child">
-                          <p>{teams[3].name}</p>
+                          <p className='yes-team'>{teams[3].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[3].name] ? (
                             <p className="points-box">
@@ -154,7 +154,7 @@ const TournamentBracket = ({
             <div className="item-child">
               <div className="item">
                 <div className="item-parent">
-                  {finalists[0] ? <p>{finalists[1].name}</p> : <p>finals</p>}
+                  {finalists[0] ? <p className='yes-team'>{finalists[1].name}</p> : <p className='no-team'>finals</p>}
                   {finalists[0] && finalsPointsObj[finalists[0].name] ? (
                     <p className="points-box">
                       {finalsPointsObj[finalists[0].name].points}
@@ -168,9 +168,9 @@ const TournamentBracket = ({
                     <div className="item">
                       <div className="item-parent">
                         {semiFinalists[0] ? (
-                          <p>{semiFinalists[2].name}</p>
+                          <p className='yes-team'>{semiFinalists[2].name}</p>
                         ) : (
-                          <p>semifinals</p>
+                          <p className='no-team'>semifinals</p>
                         )}
                         {semiFinalists[0] &&
                           semifinalPointsObj[semiFinalists[2].name] ? (
@@ -186,7 +186,7 @@ const TournamentBracket = ({
                       </div>
                       <div className="item-childrens">
                         <div className="item-child">
-                          <p>{teams[4].name}</p>
+                          <p className='yes-team'>{teams[4].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[4].name] ? (
                             <p className="points-box">
@@ -200,7 +200,7 @@ const TournamentBracket = ({
                           )}
                         </div>
                         <div className="item-child">
-                          <p>{teams[5].name}</p>
+                          <p className='yes-team'>{teams[5].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[5].name] ? (
                             <p className="points-box">
@@ -221,9 +221,9 @@ const TournamentBracket = ({
                     <div className="item">
                       <div className="item-parent">
                         {semiFinalists[0] ? (
-                          <p>{semiFinalists[3].name}</p>
+                          <p className='yes-team'>{semiFinalists[3].name}</p>
                         ) : (
-                          <p>semifinals</p>
+                          <p className='no-team'>semifinals</p>
                         )}
                         {semiFinalists[0] &&
                           semifinalPointsObj[semiFinalists[3].name] ? (
@@ -239,7 +239,7 @@ const TournamentBracket = ({
                       </div>
                       <div className="item-childrens">
                         <div className="item-child">
-                          <p>{teams[6].name}</p>
+                          <p className='yes-team'>{teams[6].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[6].name] ? (
                             <p className="points-box">
@@ -253,7 +253,7 @@ const TournamentBracket = ({
                           )}
                         </div>
                         <div className="item-child">
-                          <p>{teams[7].name}</p>
+                          <p className='yes-team'>{teams[7].name}</p>
                           {semiFinalists[0] &&
                           quarterfinalPointsObj[teams[7].name] ? (
                             <p className="points-box">

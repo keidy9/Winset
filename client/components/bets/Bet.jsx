@@ -108,11 +108,13 @@ const Bet = ({
         </div>
       </div>
       <form onSubmit={onPlaceBetHandler} className='bet-input-form'>
+        <p className='bet-dollar-sign'>$</p>
         <input
           className="bet-input"
           type="text"
           name="bet"
           placeholder="Place your bet..."
+          autoComplete='off'
         />
         <button className="bet-place-button">PLACE BET!</button>
       </form>

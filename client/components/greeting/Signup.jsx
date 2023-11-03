@@ -29,51 +29,77 @@ const Signup = ({ isSignUp }) => {
       });
       const data = await response.json();
       console.log('DATA!!!!!!!: ', data);
-      dispatch(signup_login( data ));
+      dispatch(signup_login(data));
     } catch (error) {
       console.log('invalid sign-up or login credentials');
     }
   };
 
   return (
-    <div className='signup-container'>
-      <div>99% of gamblers quit right before they hit it big!</div>
+    <div className="signup-container">
+      <div className="inspirational-quote">
+        99% of gamblers quit right before they hit it big!<br></br> Be in the
+        top 1% with a WINner's mindSET... <br></br>
+        <div className="welcome-quote">WELCOME TO WINSET</div>
+      </div>
       {isSignUp ? (
         <div>
-          <header>SIGN UP</header>
+          <header className='login-header'>SIGN UP</header>
           <form onSubmit={onSubmitHandler}>
             <label htmlFor="username">Username</label>
             <br></br>
             <input
+              className="login-input"
               type="text"
               name="username"
               placeholder="Enter a username..."
+              autoComplete="off"
             />
             <br></br>
             <label htmlFor="password">Password</label>
             <br></br>
-            <input type="password" name="password" />
+            <input
+              className="login-input"
+              type="password"
+              name="password"
+              autoComplete="off"
+            />
             <br></br>
-            <button type="submit">Sign Up!</button>
+            <div className="login-button-container">
+              <button className="login-button" type="submit">
+                Sign Up!
+              </button>
+            </div>
           </form>
         </div>
       ) : (
         <div>
-          <header>Login</header>
+          <header className='login-header'>Login</header>
           <form onSubmit={onSubmitHandler}>
             <label htmlFor="username">Username</label>
             <br></br>
             <input
+              className="login-input"
               type="text"
               name="username"
               placeholder="Enter a username..."
+              autoComplete="off"
             />
             <br></br>
             <label htmlFor="password">Password</label>
             <br></br>
-            <input type="password" name="password" />
+            <input
+              className="login-input"
+              type="password"
+              name="password"
+              autoComplete="off"
+            />
             <br></br>
-            <button type="submit">Login</button>
+            <div className="login-button-container">
+              <button className="login-button" type="submit">
+                Login
+              </button>
+            </div>
           </form>
         </div>
       )}

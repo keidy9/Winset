@@ -183,14 +183,16 @@ const App = () => {
       {/* SIGN UP/LOGIN __________________________________________________ */}
       {!isLoggedIn ? (
         <div className='signup-page'>
+          <div className='signup-with-button-container'>
           <Signup isSignUp={isSignUp} />
-          <button
+          <p className='switch-login-mode'
             onClick={() => {
               setIsSignUp(!isSignUp);
             }}
           >
-            {isSignUp ? 'Login' : 'Sign up'}
-          </button>
+            {isSignUp ? 'Have an account already? Login here!' : 'Don\'t have an account yet? Sign up here!'}
+          </p>
+          </div>
         </div>
       ) : (
         ''
