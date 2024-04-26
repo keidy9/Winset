@@ -32,9 +32,11 @@ const App = () => {
   const [odds, setOdds] = useState({});
 
   /** HISTORIC INFORMATIONAL STATES */
-  const [quarterfinalPointsObj, setQuarterfinalPointsObj] = useState([]);
-  const [semifinalPointsObj, setSemifinalPointsObj] = useState([]);
-  const [finalsPointsObj, setFinalsPointsObj] = useState([]);
+  const [points, setPoints] = useState({
+    quarterFinals: [],
+    semiFinals: [],
+    finals: [],
+  });
   const [semiFinalists, setSemiFinalists] = useState([]);
   const [finalists, setFinalists] = useState([]);
   const [winner, setWinner] = useState([]);
@@ -130,21 +132,21 @@ const App = () => {
     if (phase === 'quarterfinals') {
       setSemiFinalists(teamsCopyCopy);
       dispatch(updateBets(teamsCopyCopy));
-      setQuarterfinalPointsObj(teamPointsObj);
+      setPoints({ ...points, quarterFinals: teamPointsObj });
       setPhase('semifinals');
     }
     // FOR SEMIFINALS
     else if (phase === 'semifinals') {
       setFinalists(teamsCopyCopy);
       dispatch(updateBets(teamsCopyCopy));
-      setSemifinalPointsObj(teamPointsObj);
+      setPoints({ ...points, semiFinals: teamPointsObj });
       setPhase('finals');
     }
     //FOR FINALS
     else if (phase === 'finals') {
       setWinner(teamsCopyCopy);
       dispatch(updateBets(teamsCopyCopy));
-      setFinalsPointsObj(teamPointsObj);
+      setPoints({ ...points, finals: teamPointsObj });
       setPhase('done');
     }
   };
@@ -158,9 +160,11 @@ const App = () => {
     setPlayerPointsObj([]);
     setPhase('quarterfinals');
     setGamesObj({});
-    setQuarterfinalPointsObj([]);
-    setSemifinalPointsObj([]);
-    setFinalsPointsObj([]);
+    setPoints({
+      quarterFinals: [],
+      semiFinals: [],
+      finals: [],
+    });
     setSemiFinalists([]);
     setFinalists([]);
     setWinner([]);
@@ -182,16 +186,19 @@ const App = () => {
     <div>
       {/* SIGN UP/LOGIN __________________________________________________ */}
       {!isLoggedIn ? (
-        <div className='signup-page'>
-          <div className='signup-with-button-container'>
-          <Signup isSignUp={isSignUp} />
-          <p className='switch-login-mode'
-            onClick={() => {
-              setIsSignUp(!isSignUp);
-            }}
-          >
-            {isSignUp ? 'Have an account already? Login here!' : 'Don\'t have an account yet? Sign up here!'}
-          </p>
+        <div className="signup-page">
+          <div className="signup-with-button-container">
+            <Signup isSignUp={isSignUp} />
+            <p
+              className="switch-login-mode"
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+              }}
+            >
+              {isSignUp
+                ? 'Have an account already? Login here!'
+                : "Don't have an account yet? Sign up here!"}
+            </p>
           </div>
         </div>
       ) : (
@@ -209,9 +216,9 @@ const App = () => {
               teams={teams}
               reset={reset}
               fastForward={fastForward}
-              quarterfinalPointsObj={quarterfinalPointsObj}
-              semifinalPointsObj={semifinalPointsObj}
-              finalsPointsObj={finalsPointsObj}
+              quarterfinalPointsObj={points.quarterFinals}
+              semifinalPointsObj={points.semiFinals}
+              finalsPointsObj={points.finals}
               semiFinalists={semiFinalists}
               finalists={finalists}
               winner={winner}
