@@ -32,12 +32,16 @@ const App = () => {
   const [odds, setOdds] = useState({});
 
   /** HISTORIC INFORMATIONAL STATES */
-  const [quarterfinalPointsObj, setQuarterfinalPointsObj] = useState([]);
-  const [semifinalPointsObj, setSemifinalPointsObj] = useState([]);
-  const [finalsPointsObj, setFinalsPointsObj] = useState([]);
-  const [semiFinalists, setSemiFinalists] = useState([]);
-  const [finalists, setFinalists] = useState([]);
-  const [winner, setWinner] = useState([]);
+  const [points, setPoints] = useState({
+    quarterFinals: [],
+    semiFinals: [],
+    finals: [],
+  });
+  const [roundWinners, setRoundWinners] = useState({
+    semiFinalists: [],
+    finalists: [],
+    winner: [],
+  });
   /** FETCH TEAMS LOGIC  */
   useEffect(() => {
     fetchTeams();
@@ -128,23 +132,23 @@ const App = () => {
     setTeamPointsObj([]);
     // FOR QUARTERFINALS
     if (phase === 'quarterfinals') {
-      setSemiFinalists(teamsCopyCopy);
+      setRoundWinners({ ...roundWinners, semiFinalists: teamsCopyCopy });
       dispatch(updateBets(teamsCopyCopy));
-      setQuarterfinalPointsObj(teamPointsObj);
+      setPoints({ ...points, quarterFinals: teamPointsObj });
       setPhase('semifinals');
     }
     // FOR SEMIFINALS
     else if (phase === 'semifinals') {
-      setFinalists(teamsCopyCopy);
+      setRoundWinners({ ...roundWinners, finalists: teamsCopyCopy });
       dispatch(updateBets(teamsCopyCopy));
-      setSemifinalPointsObj(teamPointsObj);
+      setPoints({ ...points, semiFinals: teamPointsObj });
       setPhase('finals');
     }
     //FOR FINALS
     else if (phase === 'finals') {
-      setWinner(teamsCopyCopy);
+      setRoundWinners({ ...roundWinners, winner: teamsCopyCopy });
       dispatch(updateBets(teamsCopyCopy));
-      setFinalsPointsObj(teamPointsObj);
+      setPoints({ ...points, finals: teamPointsObj });
       setPhase('done');
     }
   };
@@ -158,12 +162,16 @@ const App = () => {
     setPlayerPointsObj([]);
     setPhase('quarterfinals');
     setGamesObj({});
-    setQuarterfinalPointsObj([]);
-    setSemifinalPointsObj([]);
-    setFinalsPointsObj([]);
-    setSemiFinalists([]);
-    setFinalists([]);
-    setWinner([]);
+    setPoints({
+      quarterFinals: [],
+      semiFinals: [],
+      finals: [],
+    });
+    setRoundWinners({
+      semiFinalists: [],
+      finalists: [],
+      winner: [],
+    });
     setOdds({});
   };
 
@@ -182,16 +190,19 @@ const App = () => {
     <div>
       {/* SIGN UP/LOGIN __________________________________________________ */}
       {!isLoggedIn ? (
-        <div className='signup-page'>
-          <div className='signup-with-button-container'>
-          <Signup isSignUp={isSignUp} />
-          <p className='switch-login-mode'
-            onClick={() => {
-              setIsSignUp(!isSignUp);
-            }}
-          >
-            {isSignUp ? 'Have an account already? Login here!' : 'Don\'t have an account yet? Sign up here!'}
-          </p>
+        <div className="signup-page">
+          <div className="signup-with-button-container">
+            <Signup isSignUp={isSignUp} />
+            <p
+              className="switch-login-mode"
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+              }}
+            >
+              {isSignUp
+                ? 'Have an account already? Login here!'
+                : "Don't have an account yet? Sign up here!"}
+            </p>
           </div>
         </div>
       ) : (
@@ -209,12 +220,12 @@ const App = () => {
               teams={teams}
               reset={reset}
               fastForward={fastForward}
-              quarterfinalPointsObj={quarterfinalPointsObj}
-              semifinalPointsObj={semifinalPointsObj}
-              finalsPointsObj={finalsPointsObj}
-              semiFinalists={semiFinalists}
-              finalists={finalists}
-              winner={winner}
+              quarterfinalPointsObj={points.quarterFinals}
+              semifinalPointsObj={points.semiFinals}
+              finalsPointsObj={points.finals}
+              semiFinalists={roundWinners.semiFinalists}
+              finalists={roundWinners.finalists}
+              winner={roundWinners.winner}
             />
           </div>
         </>
@@ -231,9 +242,9 @@ const App = () => {
                 teamsCopy={teamsCopy}
                 odds={odds}
                 phase={phase}
-                semiFinalists={semiFinalists}
-                finalists={finalists}
-                winner={winner}
+                semiFinalists={roundWinners.semiFinalists}
+                finalists={roundWinners.finalists}
+                winner={roundWinners.winner}
               />
             </div>
           </div>
